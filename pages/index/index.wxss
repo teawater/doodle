@@ -1,0 +1,5 @@
+/**index.wxss**/
+.canvas_style {
+  width: 750rpx;
+  height: 750rpx;
+}
