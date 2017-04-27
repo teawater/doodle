@@ -1,6 +1,7 @@
 var ctx_xy = {
   x: 0,
   y: 0,
+  l: 0,
 }
 Page({
   data: ctx_xy,
@@ -18,6 +19,7 @@ Page({
     this.setData({
       x: e.changedTouches[0].x,
       y: e.changedTouches[0].y,
+      l: e.changedTouches.length
     })
   }
 })

@@ -1,2 +1,2 @@
-<canvas class="canvas_style" canvas-id="firstCanvas" bindtouchstart="ctx_touchstart"></canvas>
-<text>{{x}} {{y}}</text>
+<canvas class="canvas_style" canvas-id="firstCanvas" bindtouchstart="ctx_touchstart" bindtouchmove="ctx_touchstart"></canvas>
+<text>start {{x}} {{y}} {{l}}</text>
