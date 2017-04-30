@@ -1,5 +1,7 @@
 var common = require('../../common.js')
 
+var ctx
+
 var ctx_xy = {
   x: 0,
   y: 0,
@@ -13,10 +15,12 @@ Page({
     console.error(e.detail.errMsg)
   },
   onReady: function (e) {
-    var ctx = wx.createCanvasContext('firstCanvas')
+    ctx = wx.createCanvasContext('firstCanvas')
 
-    ctx.setFillStyle('red')
-    ctx.fillRect(0, 0, 1000, 1000)
+    ctx.setFillStyle("#ffffff")
+    ctx.fillRect(0, 0, 749, 749)
+    ctx.setFillStyle("#000000")
+    ctx.fillRect(10, 10, 1, 1)
     ctx.draw()
   },
   ctx_touch: function (e) {
