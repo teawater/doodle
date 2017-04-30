@@ -1,6 +1,8 @@
 //app.js
+var common = require('common.js')
+
 App({
-  globalData:{
-    userInfo:null
-  }
+  onLaunch: function () {
+    common.setup_px_rpx_ratio()
+  },
 })
