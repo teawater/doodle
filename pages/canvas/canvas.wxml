@@ -1,5 +1,3 @@
 <!--index.wxml-->
 
 <canvas disable-scroll="true" class="canvas_style" canvas-id="firstCanvas" bindtouchstart="ctx_touch" bindtouchmove="ctx_touch"></canvas>
-
-<text>{{str}}</text>

@@ -6,7 +6,7 @@ function setup_px_rpx_ratio() {
   var info = wx.getSystemInfoSync()
 
   px_rpx_ration = info.windowWidth / 750
-  point_size = Math.ceil(px_rpx_ration) * 2
+  point_size = Math.ceil(px_rpx_ration)
 }
 
 function px2rpx(px) {

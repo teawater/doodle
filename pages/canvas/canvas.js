@@ -12,7 +12,6 @@ Page({
   },
   ctx_touch: function (e) {
     ctx.setFillStyle("#000000")
-    ctx.setFillStyle("#ff0000")
     common.fillRect(ctx, e.changedTouches[0].x, e.changedTouches[0].y)
     ctx.draw(true)
   }
