@@ -1,3 +1,9 @@
 <!--index.wxml-->
 
+<view wx:if="{{show_status}}">
+<text>{{status}}</text>
+</view>
+
+<view wx:else>
 <canvas disable-scroll="true" class="canvas_style" canvas-id="firstCanvas" bindtouchstart="ctx_touch" bindtouchmove="ctx_touch"></canvas>
+</view>
