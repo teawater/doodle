@@ -1,6 +1,6 @@
 <!--index.wxml-->
 
-<view wx:if="{{show_status}}">
+<view wx:if="{{status != ''}}">
 <text>{{status}}</text>
 </view>
 
