@@ -23,9 +23,8 @@ Page({
       url: wss_url,
     })
     wx.onSocketOpen(this.socketopen)
-    wx.onSocketError(function(res){
-      console.log('WebSocket连接打开失败，请检查！')
-    })
+    wx.onSocketError(this.socketerror)
+    wx.onSocketClose(this.socketclose)
   },
 
   socketopen: function(res) {
@@ -41,8 +40,15 @@ Page({
     this.setData({
       status: '服务器连接出错，重新连接，请稍等...',
     })
-    wx.sendSocketMessage({
-      data:"0"
+    wx.closeSocket()
+  },
+
+  socketclose: function(res) {
+    this.setData({
+      status: '重新连接，请稍等...',
+    })
+    wx.connectSocket({
+      url: wss_url,
     })
   },
 
