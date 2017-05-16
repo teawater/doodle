@@ -3,30 +3,21 @@ var common = require('../../common.js')
 const wss_url = 'wss://127.0.0.1/'
 var ctx
 
-/* function socketopen(res) {
-  console.log('WebSocket连接已打开！')
-  this.setData({
-    status: '服务器连接成功，下载数据，请稍等...',
-  })
-  wx.sendSocketMessage({
-    data:"0"
-  })
-} */
+var this_page
 
 Page({
+  id: 0,
+
   data: {
     status: '努力连接服务器中，请稍等...',
   },
 
-  onLoad: function(options) {
+  wss_connect: function() {
+    console.log("con")
     wx.connectSocket({
-      url: wss_url,
+      url: 'wss://127.0.0.1/',
     })
-    wx.onSocketOpen(this.socketopen)
-    wx.onSocketError(this.socketerror)
-    wx.onSocketClose(this.socketclose)
   },
-
   socketopen: function(res) {
     this.setData({
       status: '服务器连接成功，下载数据，请稍等...',
@@ -35,21 +26,25 @@ Page({
       data:"0"
     })
   },
-
   socketerror: function(res) {
     this.setData({
       status: '服务器连接出错，重新连接，请稍等...',
     })
     wx.closeSocket()
   },
-
   socketclose: function(res) {
     this.setData({
-      status: '重新连接，请稍等...',
+      status: '重新连接，请稍等... ',
     })
-    wx.connectSocket({
-      url: wss_url,
-    })
+    setTimeout(function() {this_page.wss_connect()}, 5000);
+  },
+
+  onLoad: function(options) {
+    this_page = this
+    wx.onSocketOpen(this.socketopen)
+    wx.onSocketError(this.socketerror)
+    wx.onSocketClose(this.socketclose)
+    this.wss_connect()
   },
 
   onReady: function () {
