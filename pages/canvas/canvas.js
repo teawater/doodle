@@ -16,6 +16,9 @@ Page({
     console.log("con")
     wx.connectSocket({
       url: 'wss://127.0.0.1/',
+      header:{ 
+        'content-type': 'application/json'
+      }
     })
   },
   socketopen: function(res) {
@@ -23,7 +26,7 @@ Page({
       status: '服务器连接成功，下载数据，请稍等...',
     })
     wx.sendSocketMessage({
-      data:"0"
+      data: JSON.stringify({op: "get", id: this.id})
     })
   },
   socketerror: function(res) {
