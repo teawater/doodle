@@ -2,10 +2,12 @@ var common = require('../../common.js')
 
 var this_page
 
+const ctx_x = 750
+const ctx_y = 750
+
 Page({
   id: 0,
   ctx: undefined,
-  ready: false,
 
   data: {
     status: '努力连接服务器中，请稍等...',
@@ -17,10 +19,31 @@ Page({
     if (message.id == undefined) {
       return false
     }
-    if (message.op == 0) {
-      
+    if (message.fmt == 0) {
+      /* fmt 0: color[x][y] */
+      if (message.color.length != ctx_x) {
+	return false
+      }
+      for (var x = 0; x < ctx_x; x++) {
+        if (message.color[x].length != ctx_y) {
+	  return false
+        }
+      }
       this.color = message.color
+    } else if (message.fmt == 1) {
+      /* fmt 1: color.x color.y color.val */
+      for (color in message.color) {
+        if ((color.x < 0 || color.x > ctx_x)
+	    || (color.y < 0 || color.y > ctx_y)) {
+          return false
+        }
+        this.color[color.x][color.y] = color.val
+      }
+    } else {
+      return false
     }
+
+    retun true
   }
 
   wss_connect: function() {
@@ -72,10 +95,10 @@ Page({
   onLoad: function(options) {
     this_page = this
 
-    this.color = new Array(750)
-    for (var x = 0; x < 750; x++) {
-      this.color[x] = new Array(750)
-      for (var y = 0; y < 750; y++) {
+    this.color = new Array(ctx_x)
+    for (var x = 0; x < ctx_x; x++) {
+      this.color[x] = new Array(ctx_y)
+      for (var y = 0; y < ctx_y; y++) {
         this.color[x][y] = "#ffffff"
       }
     }
@@ -89,11 +112,6 @@ Page({
 
   onReady: function () {
     this.ctx = wx.createCanvasContext('firstCanvas')
-    this.ready = true
-
-/*     this.ctx.setFillStyle("#ffffff")
-    this.ctx.fillRect(0, 0, common.rpx2px(750), common.rpx2px(750))
-    this.ctx.draw(true) */
   },
   ctx_touch: function (e) {
     ctx.setFillStyle("#000000")
