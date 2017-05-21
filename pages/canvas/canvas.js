@@ -9,7 +9,6 @@ const retry_sec = 2
 Page({
   id: 0,
   ctx: undefined,
-  connected: false,
 
   data: {
     status: '努力连接服务器中，请稍等...',
@@ -85,7 +84,7 @@ Page({
       status: '服务器连接成功，下载数据，请稍等...',
     })
     wx.sendSocketMessage({
-      data: JSON.stringify({id: this.id})
+      data: JSON.stringify({fmt: 0, id: this.id})
     })
   },
   socketmessage: function(res) {
