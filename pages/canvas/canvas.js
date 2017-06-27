@@ -31,26 +31,26 @@ Page({
   handle_message: function(res) {
     var message = JSON.parse(res.data)
 
-    if (typeof(message.id) === undefined) {
+    if (typeof(message.Id) === undefined) {
       return false
     }
 
-    if (typeof(message.fmt) !== undefined) {
-      if (message.fmt == 0) {
-        /* fmt 0: color[x][y] */
-        if (message.color.length != ctx_x) {
+    if (typeof(message.Fmt) !== undefined) {
+      if (message.Fmt == 0) {
+        /* fmt 0: Data[x][y] */
+        if (message.Data.length != ctx_x) {
           return false
         }
         for (var x = 0; x < ctx_x; x++) {
-          if (message.color[x].length != ctx_y) {
+          if (message.Data[x].length != ctx_y) {
             return false
           }
         }
-        this.color = message.color
+        this.color = message.Data
         this.show_all_color()
-      } else if (message.fmt == 1) {
+      } else if (message.Fmt == 1) {
         /* fmt 1: color.x color.y color.val */
-        for (color in message.color) {
+        for (color in message.Color) {
           if ((color.x < 0 || color.x > ctx_x) ||
             (color.y < 0 || color.y > ctx_y)) {
             return false
@@ -66,14 +66,15 @@ Page({
       }
     }
 
-    this.id = message.id
+    this.id = message.Id
 
     return true
   },
 
   wss_connect: function() {
     wx.connectSocket({
-      url: 'wss://127.0.0.1/',
+      //url: 'wss://127.0.0.1/',
+      url: 'wss://teawater.iego.net/',
       header:{ 
         'content-type': 'application/json'
       }
@@ -143,7 +144,7 @@ Page({
   },
 
   ctx_touch: function (e) {
-    ctx.setFillStyle("#000000")
+    ctx.setFillStyle("#ffffff")
     common.px_fillRect(ctx, e.changedTouches[0].x, e.changedTouches[0].y)
     ctx.draw(true)
   }

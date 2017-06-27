@@ -45,5 +45,5 @@ function px_fillRect(ctx, x, y, line) {
 module.exports.setup_px_rpx_ratio = setup_px_rpx_ratio
 module.exports.px2rpx = px2rpx
 module.exports.rpx2px = rpx2px
-module.exports.px_fillRect = rpx_fillRect
+module.exports.rpx_fillRect = rpx_fillRect
 module.exports.px_fillRect = px_fillRect
